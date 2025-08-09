@@ -1,5 +1,6 @@
 import { Directive, ElementRef, inject, input } from '@angular/core';
 import Swal from 'sweetalert2';
+import { LogDirective } from './log.directive';
 
 @Directive({
   selector: 'a[appSafeLink]',
@@ -7,6 +8,7 @@ import Swal from 'sweetalert2';
   host: {
     '(click)': 'onConfirmLeavePage($event)',
   },
+  hostDirectives:[LogDirective]
 })
 export class SafeLinkDirective {
   queryParam = input('myapp', {alias: 'appSafeLink'});
