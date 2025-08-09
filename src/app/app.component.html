@@ -7,5 +7,7 @@
   <!-- @if(isAdmin()){
   <p>only Admin can see this content..!</p>
   } -->
-  <p appAuth="admin">Only Admin Can see this content..!</p>
+  <ng-template appAuth="admin">
+    <p>only Admin can see this content..!</p>
+  </ng-template>
 </main>
