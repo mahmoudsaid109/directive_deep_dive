@@ -1,4 +1,4 @@
-import { Directive, input } from '@angular/core';
+import { Directive, ElementRef, inject, input } from '@angular/core';
 import Swal from 'sweetalert2';
 
 @Directive({
@@ -10,13 +10,14 @@ import Swal from 'sweetalert2';
 })
 export class SafeLinkDirective {
   queryParam = input('myapp', {alias: 'appSafeLink'});
+  private hostElement = inject<ElementRef<HTMLAnchorElement>>(ElementRef)
   // constructor() {
   //   console.log('SafeLinkDirective is active..!');
   // }
   //   onConfirmLeavePage(event: MouseEvent) {
   //     const wantsToLeave = window.confirm('Are You Want To Leave This Page..?');
   //     if(wantsToLeave){
-  //  const address =(event.target as HTMLAnchorElement).href;
+  //  const address =this.hostElement.nativeElement.href;
   // (event.target as HTMLAnchorElement).href = address + '?from=' + this.queryParam;
   //         return;
   //     }
@@ -40,7 +41,7 @@ export class SafeLinkDirective {
     });
 
     if (result.isConfirmed) {
-      const address = (event.target as HTMLAnchorElement).href;
+      const address = this.hostElement.nativeElement.href;
       // (event.target as HTMLAnchorElement).href = address + '?from=' + this.queryParam;
       window.location.href = address + '?from=' + this.queryParam;
     }
